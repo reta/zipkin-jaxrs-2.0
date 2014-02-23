@@ -42,10 +42,6 @@ object ProjectBuild extends Build {
       settings = defaultSettings ++ Seq(           
         name := "zipkin-jaxrs-2.0-server",           
                 
-//        excludedJars in assembly <<= (fullClasspath in assembly) map { cp => 
-//            cp filter {_.data.getName == "commons-logging-1.1.1.jar"}
-//        },
-        
         mergeStrategy in assembly <<= (mergeStrategy in assembly) { old => {
             case PathList(ps @ _*) if List( "DEPENDENCIES", "LICENSE", "NOTICE" ).exists( ps.last equals _ ) => MergeStrategy.discard
             case PathList(ps @ _*) if List( "bus-extensions.txt" ).exists( ps.last equals _ ) => MergeStrategy.concat
@@ -82,10 +78,10 @@ object ProjectBuild extends Build {
         mainClass in run := Some("com.example.client.ClientStarter"),
         
         libraryDependencies ++= Seq(
-            "org.glassfish.hk2" % "hk2-utils" % "2.2.0-b21",
-            "org.glassfish.hk2" % "hk2-locator" % "2.2.0-b21",
-            "org.glassfish.jersey.core" % "jersey-client" % "2.5.1" 
-                exclude( "org.glassfish.hk2.external", "javax.inject" ) 
+            "org.glassfish.hk2" % "hk2-utils" % "2.2.0-b21" exclude( "org.glassfish.hk2.external", "javax.inject" ),
+            "org.glassfish.hk2" % "hk2-locator" % "2.2.0-b21" exclude( "org.glassfish.hk2.external", "javax.inject" ),
+            "org.glassfish.jersey.core" % "jersey-client" % "2.5.1"                  
+                exclude( "org.glassfish.hk2.external", "javax.inject" )
                 exclude( "org.glassfish.hk2", "hk2-utils")
                 exclude( "org.glassfish.hk2", "hk2-locator"),
             "javax.ws.rs" % "javax.ws.rs-api" % "2.0"            
