@@ -82,6 +82,7 @@ object ProjectBuild extends Build {
         mainClass in run := Some("com.example.client.ClientStarter"),
         
         libraryDependencies ++= Seq(
+            "org.glassfish.hk2" % "hk2-utils" % "2.2.0-b21",
             "org.glassfish.jersey.core" % "jersey-client" % "2.5.1" exclude( "org.glassfish.hk2.external", "javax.inject" ),
             "javax.ws.rs" % "javax.ws.rs-api" % "2.0"            
         )
