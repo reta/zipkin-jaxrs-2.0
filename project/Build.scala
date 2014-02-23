@@ -83,7 +83,11 @@ object ProjectBuild extends Build {
         
         libraryDependencies ++= Seq(
             "org.glassfish.hk2" % "hk2-utils" % "2.2.0-b21",
-            "org.glassfish.jersey.core" % "jersey-client" % "2.5.1" exclude( "org.glassfish.hk2.external", "javax.inject" ),
+            "org.glassfish.hk2" % "hk2-locator" % "2.2.0-b21",
+            "org.glassfish.jersey.core" % "jersey-client" % "2.5.1" 
+                exclude( "org.glassfish.hk2.external", "javax.inject" ) 
+                exclude( "org.glassfish.hk2", "hk2-utils")
+                exclude( "org.glassfish.hk2", "hk2-locator"),
             "javax.ws.rs" % "javax.ws.rs-api" % "2.0"            
         )
       )
